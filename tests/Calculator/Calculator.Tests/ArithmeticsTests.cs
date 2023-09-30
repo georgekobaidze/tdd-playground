@@ -31,4 +31,22 @@ public class ArithmeticsTests
         // Assert
         Assert.Equal(expected, actual);
     }
+
+    [Theory]
+    [InlineData(8, 4, 32)]
+    [InlineData(2.21, 23.78, 52.5538)]
+    [InlineData(-12, 2.5, -30)]
+    [InlineData(3.2, -2.99, -9.568)]
+    [InlineData(0, -2.99, 0)]
+    [InlineData(-5, 0, 0)]
+    public void Multiply_SimpleValuesShouldCalculate(decimal x, decimal y, decimal expected)
+    {
+        // Arrange
+        
+        // Act
+        var actual = Arithmetics.Multiply(x, y);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 }
