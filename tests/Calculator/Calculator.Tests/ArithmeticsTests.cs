@@ -49,4 +49,29 @@ public class ArithmeticsTests
         // Assert
         Assert.Equal(expected, actual);
     }
+
+    [Theory]
+    [InlineData(8, 4, 2)]
+    [InlineData(-10, 2, -5)]
+    [InlineData(0, 10, 0)]
+    public void Divide_SimpleValuesShouldCalculate(decimal x, decimal y, decimal expected)
+    {
+        // Arrange
+        
+        // Act
+        var actual = x / y;
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(1, 0)]
+    [InlineData(-15, 0)]
+    [InlineData(2.39, 0)]
+    public void Divide_DivideByZeroShouldReturnException(decimal x, decimal y)
+    { 
+        // Assert
+        Assert.Throws<DivideByZeroException>(() => Arithmetics.Divide(x, y));
+    }
 }
