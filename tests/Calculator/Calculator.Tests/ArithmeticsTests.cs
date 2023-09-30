@@ -2,14 +2,16 @@
 
 public class ArithmeticsTests
 {
-    [Fact]
-    public void Add_SimpleValuesShouldCalculate()
+    [Theory]
+    [InlineData(3, 6, 9)]
+    [InlineData(2.6, 2.8, 5.4)]
+    [InlineData(-1.2, 0, -1.2)]
+    public void Add_SimpleValuesShouldCalculate(decimal x, decimal y, decimal expected)
     {
         // Arrange
-        var expected = 5m;
-
+        
         // Act
-        var actual = Arithmetics.Add(3, 2);
+        var actual = Arithmetics.Add(x, y);
 
         // Assert
         Assert.Equal(expected, actual);
