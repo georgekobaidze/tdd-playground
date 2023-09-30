@@ -16,4 +16,19 @@ public class ArithmeticsTests
         // Assert
         Assert.Equal(expected, actual);
     }
+
+    [Theory]
+    [InlineData(100, 36, 64)]
+    [InlineData(9.2, 10.92, -1.72)]
+    [InlineData(11, 0, 11)]
+    public void Subtract_SimpleValuesShouldCalculate(decimal x, decimal y, decimal expected)
+    {
+        // Arrange
+        
+        // Act
+        var actual = Arithmetics.Subtract(x, y);
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
 }
