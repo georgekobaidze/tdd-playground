@@ -1,4 +1,4 @@
-﻿namespace Calculator;
+﻿namespace Samples.Calculator;
 
 public static class Arithmetics
 {

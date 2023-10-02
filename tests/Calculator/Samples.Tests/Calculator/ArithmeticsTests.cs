@@ -1,4 +1,6 @@
-﻿namespace Calculator.Tests;
+﻿using Samples.Calculator;
+
+namespace Samples.Tests.Calculator;
 
 public class ArithmeticsTests
 {
