@@ -7,13 +7,9 @@ public static class DataAccess
     public static void AddNewPerson(Person person)
     {
         var people = GetAllPeople();
-        people.Add(person);
-        
-        var lines = new List<string>();
-        foreach (var user in people)
-        {
-            lines.Add($"{user.FirstName},{user.LastName}");
-        }
+
+        AddPersonToPeopleList(people, person);
+        var lines = ConvertModelsToCsv(people);
         
         File.WriteAllLines(personTextFile, lines);
     }
@@ -30,5 +26,21 @@ public static class DataAccess
         }
 
         return output;
+    }
+
+    public static void AddPersonToPeopleList(List<Person> people, Person person)
+    {
+        people.Add(person);
+    }
+
+    public static List<string> ConvertModelsToCsv(List<Person> people)
+    {
+        var lines = new List<string>();
+        foreach (var user in people)
+        {
+            lines.Add($"{user.FirstName},{user.LastName}");
+        }
+
+        return lines;
     }
 }
