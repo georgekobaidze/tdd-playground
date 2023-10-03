@@ -30,6 +30,12 @@ public static class DataAccess
 
     public static void AddPersonToPeopleList(List<Person> people, Person person)
     {
+        if (string.IsNullOrWhiteSpace(person.FirstName))
+            throw new ArgumentException(message: "Invalid parameter", paramName: "FirstName");
+
+        if (string.IsNullOrWhiteSpace(person.LastName))
+            throw new ArgumentException(message: "Invalid parameter", paramName: "LastName");
+        
         people.Add(person);
     }
 
