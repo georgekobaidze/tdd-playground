@@ -27,4 +27,25 @@ public class DataAccessTests
         Assert.Throws<ArgumentException>(wrongParameter,() =>
             Samples.DataAccess.DataAccess.AddPersonToPeopleList(peopleList, newPerson));
     }
+
+    [Fact]
+    public void ConvertModelsToCsv_WithEmptyList_ReturnsEmptyCsv()
+    {
+        var people = new List<Person>();
+        
+        var result = Samples.DataAccess.DataAccess.ConvertModelsToCsv(people);
+        
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void ConvertModelsToCsv_WithOnePerson_ReturnsOneCsvLine()
+    {
+        var people = new List<Person> { new Person { FirstName = "Giorgi", LastName = "Kobaidze" } };
+
+        var result = Samples.DataAccess.DataAccess.ConvertModelsToCsv(people);
+
+        Assert.Single(result);
+        Assert.Equal("Giorgi,Kobaidze", result[0]);
+    }
 }
