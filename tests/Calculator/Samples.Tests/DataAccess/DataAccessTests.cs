@@ -68,4 +68,61 @@ public class DataAccessTests
         Assert.Contains("Mark,Webber", result);
         Assert.All(result, line => Assert.Matches(@"^\w+,\w+$", line));
     }
+
+    [Fact]
+    public void GetPeopleObjectList_WithEmptyContent_ReturnsEmptyList()
+    {
+        var content = Array.Empty<string>();
+
+        var actual = Samples.DataAccess.DataAccess.GetPeopleObjectList(content);
+        
+        Assert.Empty(actual);
+    }
+
+    [Fact]
+    public void GetPeopleObjectList_WithOneItemInContent_ReturnsListWithSingleObject()
+    {
+        var content = new string[] { "Giorgi,Kobaidze" };
+
+        var actual = Samples.DataAccess.DataAccess.GetPeopleObjectList(content);
+        
+        Assert.Single(actual);
+        Assert.Equal("Giorgi", actual[0].FirstName);
+        Assert.Equal("Kobaidze", actual[0].LastName);
+    }
+
+    [Fact]
+    public void GetPeopleObjectList_WithMultipleItemsInContent_ReturnsListWithMultipleObjects()
+    {
+        // Arrange
+        var content = new string[]
+        {
+            "Giorgi,Kobaidze",
+            "Fernando,Alonso",
+            "Mark,Webber"
+        };
+
+        // Act
+        var actual = Samples.DataAccess.DataAccess.GetPeopleObjectList(content);
+
+        // Assert
+        Assert.Equal(3, actual.Count);
+
+        Assert.Collection(actual,
+            person =>
+            {
+                Assert.Equal("Giorgi", person.FirstName);
+                Assert.Equal("Kobaidze", person.LastName);
+            },
+            person =>
+            {
+                Assert.Equal("Fernando", person.FirstName);
+                Assert.Equal("Alonso", person.LastName);
+            },
+            person =>
+            {
+                Assert.Equal("Mark", person.FirstName);
+                Assert.Equal("Webber", person.LastName);
+            });
+    }
 }

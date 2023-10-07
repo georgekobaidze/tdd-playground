@@ -18,7 +18,13 @@ public static class DataAccess
     {
         var content = File.ReadAllLines(personTextFile);
 
+        return GetPeopleObjectList(content);
+    }
+
+    public static List<Person> GetPeopleObjectList(string[] content)
+    {
         var output = new List<Person>();
+        
         foreach (var line in content)
         {
             var data = line.Split(',');
