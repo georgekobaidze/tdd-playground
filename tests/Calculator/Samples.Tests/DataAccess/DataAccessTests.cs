@@ -47,5 +47,25 @@ public class DataAccessTests
 
         Assert.Single(result);
         Assert.Equal("Giorgi,Kobaidze", result[0]);
+        Assert.Matches(@"^\w+,\w+$", result[0]);
+    }
+
+    [Fact]
+    public void ConvertModelsToCsv_WithMultiple_ReturnsMultipleCsvLines()
+    {
+        var people = new List<Person>
+        {
+            new Person { FirstName = "Giorgi", LastName = "Kobaidze" },
+            new Person { FirstName = "Fernando", LastName = "Alonso" },
+            new Person { FirstName = "Mark", LastName = "Webber" }
+        };
+
+        var result = Samples.DataAccess.DataAccess.ConvertModelsToCsv(people);
+        
+        Assert.Equal(3, result.Count);
+        Assert.Contains("Giorgi,Kobaidze", result);
+        Assert.Contains("Fernando,Alonso", result);
+        Assert.Contains("Mark,Webber", result);
+        Assert.All(result, line => Assert.Matches(@"^\w+,\w+$", line));
     }
 }
